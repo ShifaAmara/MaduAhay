@@ -92,7 +92,7 @@ export function renderHomeView() {
         <span class="rounded-full border border-[#463721]/30 bg-[#FFE386] px-4 py-1 font-hand text-[17px] text-[#463721] sm:text-[18px]">
           ${state.products.length} Produk Pilihan &bull; ${
     state.categories.length
-  } Kategori Nektar &bull; WA ${escapeHtml(formatDisplayPhone(state.settings.whatsappNumber))}
+  } Kategori Nektar &bull; 100% Murni Alami
         </span>
 
         <h1 class="type-display-xxl mt-4 max-w-[920px] text-[var(--color-ink)]">
@@ -960,6 +960,9 @@ export function renderAdminView() {
   const lowStockProducts = state.products
     .filter((p) => p.stock <= 10)
     .sort((a, b) => a.stock - b.stock);
+  const discountedProducts = state.products.filter(
+    (p) => Number(p.originalPrice) > Number(p.price)
+  );
 
   const editingArt = state.editingArticleId
     ? state.articles.find((a) => a.id === state.editingArticleId)
@@ -1073,6 +1076,60 @@ export function renderAdminView() {
             <div class="rounded-[16px] border border-[#463721]/25 bg-[var(--color-surface)] p-6">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <div>
+                  <span class="inline-block rounded-full bg-[#CB533B] px-3 py-1 text-[12px] font-bold text-[#FFFFFF]">Promo &amp; Diskon Aktif</span>
+                  <h2 class="mt-2 text-[20px] font-bold text-[var(--color-ink)]">Daftar Produk Sedang Diskon (${
+                    discountedProducts.length
+                  } Produk)</h2>
+                </div>
+                <button type="button" data-action="admin-tab" data-tab="produk" class="min-h-[42px] rounded-[10px] border border-[#463721] bg-[#FFE386] px-4 text-[13px] font-bold text-[#463721]">Atur Diskon Produk &rarr;</button>
+              </div>
+
+              ${
+                discountedProducts.length === 0
+                  ? `<p class="mt-4 text-[14px] text-[var(--color-muted)]">Belum ada produk yang sedang diskon. Buka tab <strong>2. Kelola Produk</strong> untuk mengaktifkan diskon 10%, 15%, atau 20%.</p>`
+                  : `<div class="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
+                      ${discountedProducts
+                        .map((item) => {
+                          const pct =
+                            Number(item.discountPercent) ||
+                            Math.round(
+                              ((item.originalPrice - item.price) / item.originalPrice) * 100
+                            );
+                          return `
+                          <div class="flex flex-col justify-between rounded-[12px] border border-[#CB533B]/35 bg-[var(--color-surface-alt)]/30 p-4">
+                            <div>
+                              <div class="flex items-center justify-between gap-2">
+                                <span class="rounded-full bg-[#CB533B] px-2.5 py-0.5 text-[11px] font-bold text-[#FFFFFF]">Diskon ${pct}%</span>
+                                <span class="text-[12px] font-semibold text-[var(--color-muted)]">Stok ${
+                                  item.stock
+                                }</span>
+                              </div>
+                              <h3 class="mt-2.5 text-[16px] font-bold leading-snug text-[var(--color-ink)]">${escapeHtml(
+                                item.name
+                              )}</h3>
+                              <div class="mt-1.5 flex flex-wrap items-baseline gap-2">
+                                <span class="text-[17px] font-bold text-[#463721]">${formatRupiah(
+                                  item.price
+                                )}</span>
+                                <span class="text-[13px] font-semibold text-[var(--color-muted)] line-through">${formatRupiah(
+                                  item.originalPrice
+                                )}</span>
+                              </div>
+                            </div>
+                            <button type="button" data-action="set-product-discount" data-product-id="${escapeHtml(
+                              item.id
+                            )}" data-discount="0" class="mt-3 min-h-[38px] w-full rounded-[8px] border border-[#463721]/40 bg-[var(--color-surface)] text-[12px] font-bold text-[var(--color-ink)] hover:bg-[#463721] hover:text-[#FFE386]">Matikan Diskon</button>
+                          </div>
+                        `;
+                        })
+                        .join('')}
+                    </div>`
+              }
+            </div>
+
+            <div class="rounded-[16px] border border-[#463721]/25 bg-[var(--color-surface)] p-6">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
                   <span class="inline-block rounded-full bg-[#FFD6B0] px-3 py-1 text-[12px] font-bold text-[#2B1B10]">Peringatan Otomatis (Stok &le; 10)</span>
                   <h2 class="mt-2 text-[20px] font-bold text-[var(--color-ink)]">Daftar Produk Stok Menipis (${
                     lowStockProducts.length
@@ -1164,8 +1221,12 @@ export function renderAdminView() {
                   </select>
                 </div>
                 <div>
-                  <label for="pf-price" class="mb-1 block text-[13px] font-bold">Harga Satuan (Rp)</label>
+                  <label for="pf-price" class="mb-1 block text-[13px] font-bold">Harga Jual Aktif (Rp)</label>
                   <input id="pf-price" type="number" min="0" required value="95000" class="vs-input" />
+                </div>
+                <div>
+                  <label for="pf-original-price" class="mb-1 block text-[13px] font-bold">Harga Coret / Normal (Opsional Diskon)</label>
+                  <input id="pf-original-price" type="number" min="0" placeholder="Kosongkan jika tidak diskon" class="vs-input" />
                 </div>
                 <div>
                   <label for="pf-pack" class="mb-1 block text-[13px] font-bold">Kemasan / Isi</label>
@@ -1200,14 +1261,20 @@ export function renderAdminView() {
                     <th class="p-4">Produk</th>
                     <th class="p-4">Kategori</th>
                     <th class="p-4">Harga</th>
+                    <th class="p-4">Atur Diskon</th>
                     <th class="p-4">Stok</th>
                     <th class="p-4 text-right">Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
                   ${state.products
-                    .map(
-                      (p) => `
+                    .map((p) => {
+                      const hasDisc = Number(p.originalPrice) > Number(p.price);
+                      const activePct = hasDisc
+                        ? Number(p.discountPercent) ||
+                          Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100)
+                        : 0;
+                      return `
                       <tr class="border-b border-[var(--color-hairline)]">
                         <td class="p-4">
                           <div class="flex items-center gap-3">
@@ -1225,7 +1292,33 @@ export function renderAdminView() {
                           </div>
                         </td>
                         <td class="p-4">${escapeHtml(p.category)}</td>
-                        <td class="p-4 font-bold text-[#463721]">${formatRupiah(p.price)}</td>
+                        <td class="p-4">
+                          <span class="block font-bold text-[#463721]">${formatRupiah(
+                            p.price
+                          )}</span>
+                          ${
+                            hasDisc
+                              ? `<span class="text-[12px] text-[var(--color-muted)] line-through">${formatRupiah(
+                                  p.originalPrice
+                                )}</span> <span class="rounded-full bg-[#CB533B] px-2 py-0.5 text-[11px] font-bold text-[#FFFFFF]">-${activePct}%</span>`
+                              : `<span class="text-[11px] text-[var(--color-muted)]">Harga Normal</span>`
+                          }
+                        </td>
+                        <td class="p-4">
+                          <div class="flex flex-wrap gap-1">
+                            ${[0, 10, 15, 20]
+                              .map(
+                                (pct) => `<button type="button" data-action="set-product-discount" data-product-id="${escapeHtml(
+                                  p.id
+                                )}" data-discount="${pct}" class="rounded-[6px] border px-2 py-1 text-[12px] font-bold ${
+                                  activePct === pct
+                                    ? 'border-[#463721] bg-[#463721] text-[#FFE386]'
+                                    : 'border-[#463721]/30 bg-[var(--color-surface)] text-[var(--color-ink)] hover:bg-[#FFE386]'
+                                }">${pct === 0 ? '0%' : `-${pct}%`}</button>`
+                              )
+                              .join('')}
+                          </div>
+                        </td>
                         <td class="p-4">
                           <div class="inline-flex items-center gap-1.5">
                             <button type="button" data-action="stock-delta" data-product-id="${escapeHtml(
@@ -1243,8 +1336,8 @@ export function renderAdminView() {
                           )}" class="rounded-[8px] border border-[#CB533B] px-3 py-1.5 text-[12px] font-bold text-[#CB533B] hover:bg-[#CB533B] hover:text-[#FFFFFF]">Hapus</button>
                         </td>
                       </tr>
-                    `
-                    )
+                    `;
+                    })
                     .join('')}
                 </tbody>
               </table>

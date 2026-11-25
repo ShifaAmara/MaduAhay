@@ -10,16 +10,16 @@ import {
 import { slugify } from './utils.js';
 
 const KEYS = {
-  products: 'maduahay_v1_products',
-  categories: 'maduahay_v1_categories',
-  articles: 'maduahay_v1_articles',
-  reviews: 'maduahay_v1_reviews',
-  orders: 'maduahay_v1_orders',
-  operatorLogs: 'maduahay_v1_operator_logs',
-  settings: 'maduahay_v1_settings',
-  cart: 'maduahay_v1_cart',
-  authRole: 'maduahay_v1_auth_role',
-  theme: 'maduahay_v1_theme',
+  products: 'maduahay_v2_products',
+  categories: 'maduahay_v2_categories',
+  articles: 'maduahay_v2_articles',
+  reviews: 'maduahay_v2_reviews',
+  orders: 'maduahay_v2_orders',
+  operatorLogs: 'maduahay_v2_operator_logs',
+  settings: 'maduahay_v2_settings',
+  cart: 'maduahay_v2_cart',
+  authRole: 'maduahay_v2_auth_role',
+  theme: 'maduahay_v2_theme',
 };
 
 function readStorage(key, fallback) {
@@ -327,6 +327,27 @@ export const store = {
       const newId = `${slugify(input.name)}-${Date.now().toString(36)}`;
       state.products = [{ ...input, id: newId }, ...state.products];
     }
+    emit();
+  },
+
+  setProductDiscount(id, discountPercent) {
+    const pct = Math.max(0, Math.min(80, Math.round(Number(discountPercent) || 0)));
+    state.products = state.products.map((p) => {
+      if (p.id !== id) return p;
+      const basePrice =
+        Number(p.originalPrice) > Number(p.price) ? Number(p.originalPrice) : Number(p.price);
+      if (pct <= 0) {
+        const { originalPrice: _orig, discountPercent: _disc, ...rest } = p;
+        return { ...rest, price: basePrice };
+      }
+      const discountedPrice = Math.max(1000, Math.round((basePrice * (100 - pct)) / 100 / 1000) * 1000);
+      return {
+        ...p,
+        originalPrice: basePrice,
+        discountPercent: pct,
+        price: discountedPrice,
+      };
+    });
     emit();
   },
 

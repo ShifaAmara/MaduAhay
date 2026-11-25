@@ -186,6 +186,11 @@ export function renderProductCard(product) {
   const isOut = product.stock <= 0;
   const isLow = product.stock > 0 && product.stock <= 10;
   const floodColor = FLAVOUR_ACCENTS[product.category] || '#FFE386';
+  const hasDiscount = Number(product.originalPrice) > Number(product.price);
+  const discountPct = hasDiscount
+    ? Number(product.discountPercent) ||
+      Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+    : 0;
 
   return `
     <article class="group flex flex-col justify-between rounded-[14px] border border-[#463721]/20 bg-[#FFFFFF] p-3 text-[#463721] transition-transform duration-300 hover:-translate-y-1">
@@ -209,6 +214,11 @@ export function renderProductCard(product) {
             <span class="rounded-full bg-[#463721]/90 px-3 py-0.5 font-sans text-[11px] font-semibold text-[#F8F8F0]">${escapeHtml(
               product.category
             )}</span>
+            ${
+              hasDiscount
+                ? `<span class="rounded-full bg-[#CB533B] px-2.5 py-0.5 font-sans text-[11px] font-bold text-[#FFFFFF]">Diskon ${discountPct}%</span>`
+                : ''
+            }
             ${
               product.isBestSeller
                 ? `<span class="rounded-full border border-[#463721] bg-[#FFE386] px-2.5 py-0.5 font-sans text-[11px] font-bold text-[#463721]">Terlaris</span>`
@@ -250,8 +260,18 @@ export function renderProductCard(product) {
       <!-- PROMINENT PRICE STRIP & ACTION BUTTONS -->
       <div class="mt-3.5 flex flex-wrap items-center justify-between gap-2 border-t border-[#463721]/15 px-1.5 pt-3">
         <div>
-          <span class="block text-[10px] font-bold uppercase tracking-wider text-[#6E5838]">Harga Resmi</span>
-          <span class="price-highlight-badge mt-0.5">${formatRupiah(product.price)}</span>
+          ${
+            hasDiscount
+              ? `<span class="block text-[10px] font-bold uppercase tracking-wider text-[#CB533B]">Harga Promo (-${discountPct}%)</span>
+                 <div class="mt-0.5 flex flex-wrap items-baseline gap-1.5">
+                   <span class="price-highlight-badge">${formatRupiah(product.price)}</span>
+                   <span class="font-sans text-[12px] font-semibold text-[#6E5838] line-through">${formatRupiah(
+                     product.originalPrice
+                   )}</span>
+                 </div>`
+              : `<span class="block text-[10px] font-bold uppercase tracking-wider text-[#6E5838]">Harga Resmi</span>
+                 <span class="price-highlight-badge mt-0.5">${formatRupiah(product.price)}</span>`
+          }
         </div>
 
         <div class="flex items-center gap-1.5">
@@ -826,10 +846,25 @@ export function renderModalsAndDrawers() {
                 <h2 id="modal-product-title" class="type-display-md text-[var(--color-ink)]">${escapeHtml(
                   selectedProduct.name
                 )}</h2>
-                <div class="mt-3">
+                <div class="mt-3 flex flex-wrap items-center gap-3">
                   <span class="price-highlight-badge !text-[32px] !px-4 !py-1.5">${formatRupiah(
                     selectedProduct.price
                   )}</span>
+                  ${
+                    Number(selectedProduct.originalPrice) > Number(selectedProduct.price)
+                      ? `<span class="font-sans text-[16px] font-semibold text-[var(--color-muted)] line-through">${formatRupiah(
+                          selectedProduct.originalPrice
+                        )}</span>
+                         <span class="rounded-full bg-[#CB533B] px-3 py-1 font-sans text-[12px] font-bold text-[#FFFFFF]">Diskon ${
+                           Number(selectedProduct.discountPercent) ||
+                           Math.round(
+                             ((selectedProduct.originalPrice - selectedProduct.price) /
+                               selectedProduct.originalPrice) *
+                               100
+                           )
+                         }%</span>`
+                      : ''
+                  }
                 </div>
                 <p class="type-body-md mt-4 text-[var(--color-body)]">${escapeHtml(
                   selectedProduct.description

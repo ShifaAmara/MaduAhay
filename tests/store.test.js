@@ -38,9 +38,15 @@ assert.equal(ART_PRESETS.length, 6, 'Must provide 6 realistic studio honey photo
 // 3. Verify initial operator order queue exists
 assert.ok(INITIAL_ORDERS.length >= 3, 'Must have initial orders for Operator & Admin portals');
 
-// 4. Verify at least 2 products with stock <= 10 for low-stock alert
+// 4. Verify at least 2 products with stock <= 10 for low-stock alert & 3 discounted products
 const lowStock = INITIAL_PRODUCTS.filter((p) => p.stock <= 10);
 assert.ok(lowStock.length >= 2, 'Must have at least 2 products with stock <= 10');
+
+const discounted = INITIAL_PRODUCTS.filter((p) => Number(p.originalPrice) > Number(p.price));
+assert.equal(discounted.length, 3, 'Must have 3 initial discounted products');
+for (const d of discounted) {
+  assert.ok(d.discountPercent >= 10 && d.discountPercent <= 50, 'Discount percent must be valid');
+}
 
 // 5. Verify at least 4 published honey articles
 assert.ok(INITIAL_ARTICLES.length >= 4, 'Must have at least 4 honey articles');

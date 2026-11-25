@@ -424,6 +424,19 @@ function setupGlobalEvents() {
         }
         return;
       }
+      if (action === 'set-product-discount') {
+        const pid = actionEl.getAttribute('data-product-id');
+        const pct = Number(actionEl.getAttribute('data-discount') || 0);
+        if (pid) {
+          store.setProductDiscount(pid, pct);
+          store.notify(
+            pct > 0
+              ? `Diskon ${pct}% berhasil diaktifkan pada produk tersebut.`
+              : 'Diskon dimatikan dan harga dikembalikan ke harga normal.'
+          );
+        }
+        return;
+      }
       if (action === 'delete-product') {
         const pid = actionEl.getAttribute('data-product-id');
         if (pid) {
@@ -553,6 +566,11 @@ function setupGlobalEvents() {
       const name = document.getElementById('pf-name')?.value?.trim() || 'Madu Baru';
       const category = document.getElementById('pf-category')?.value || 'Madu Hutan Murni';
       const price = Number(document.getElementById('pf-price')?.value || 95000);
+      const originalPriceRaw = Number(document.getElementById('pf-original-price')?.value || 0);
+      const hasDiscount = originalPriceRaw > price;
+      const discountPercent = hasDiscount
+        ? Math.round(((originalPriceRaw - price) / originalPriceRaw) * 100)
+        : 0;
       const packContents =
         document.getElementById('pf-pack')?.value?.trim() || 'Stoples kaca 350 gram';
       const weightGrams = Number(document.getElementById('pf-weight')?.value || 350);
@@ -565,6 +583,7 @@ function setupGlobalEvents() {
         name,
         category,
         price,
+        ...(hasDiscount ? { originalPrice: originalPriceRaw, discountPercent } : {}),
         packContents,
         weightGrams,
         stock,
