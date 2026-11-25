@@ -1,0 +1,540 @@
+@import "tailwindcss";
+
+:root {
+  --color-canvas: #f8f8f0;
+  --color-surface: #ffffff;
+  --color-surface-alt: #ece2b1;
+  --color-butter: #ffe386;
+  --color-ink: #463721;
+  --color-body: #57452a;
+  --color-muted: #6e5838;
+  --color-border: #463721;
+  --color-hairline: #ddd3a8;
+  --color-honey: #b9902e;
+  --color-leaf: #606112;
+  --color-coral: #cb533b;
+}
+
+[data-theme="dark"] {
+  --color-canvas: #241c11;
+  --color-surface: #332819;
+  --color-surface-alt: #463721;
+  --color-butter: #ffe386;
+  --color-ink: #f8f8f0;
+  --color-body: #ece2b1;
+  --color-muted: #cbbd93;
+  --color-border: #ece2b1;
+  --color-hairline: #5c492d;
+  --color-honey: #ffe386;
+  --color-leaf: #a5a646;
+  --color-coral: #e06d56;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-poster {
+  font-family: "Khand", sans-serif;
+}
+
+.font-hand {
+  font-family: "Patrick Hand", cursive, sans-serif;
+}
+
+/* Base interactive affordances (R-39 & R-32) */
+a[href],
+button:not(:disabled),
+summary,
+select:not(:disabled),
+label[for],
+[role="button"]:not([aria-disabled="true"]),
+[role="tab"],
+[role="switch"] {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+:focus-visible {
+  outline: 2.5px dashed #b9902e;
+  outline-offset: 3px;
+}
+
+/* Typography Hierarchy */
+.type-display-xxl {
+  font-family: "Khand", sans-serif;
+  font-size: clamp(3.3rem, 8.2vw, 7.2rem);
+  line-height: 0.86;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.type-display-lg {
+  font-family: "Khand", sans-serif;
+  font-size: clamp(2.4rem, 5.4vw, 4.6rem);
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.type-display-md {
+  font-family: "Khand", sans-serif;
+  font-size: clamp(1.85rem, 3.6vw, 3.1rem);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.type-display-xs {
+  font-family: "Khand", sans-serif;
+  font-size: clamp(1.4rem, 2.4vw, 2.1rem);
+  line-height: 0.98;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.type-heading {
+  font-family: "Patrick Hand", cursive, sans-serif;
+  font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+  line-height: 1.2;
+}
+
+.type-body-lg {
+  font-size: clamp(1.05rem, 1.4vw, 1.28rem);
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+}
+
+.type-body-md {
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.type-body-sm {
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.type-caption {
+  font-size: 0.8rem;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+/* Palmo Pinned Placard Card */
+.placard-card {
+  position: relative;
+  border-radius: 24px;
+  border: 1.5px solid rgba(70, 55, 33, 0.45);
+  background-color: var(--color-surface);
+}
+
+[data-theme="dark"] .placard-card {
+  border-color: rgba(236, 226, 177, 0.35);
+}
+
+.placard-rivets::before,
+.placard-rivets::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: var(--color-border);
+  pointer-events: none;
+}
+
+.placard-rivets::before {
+  left: 18px;
+}
+
+.placard-rivets::after {
+  right: 18px;
+}
+
+/* HIGH-VISIBILITY PROMINENT PRICE BADGE */
+.price-highlight-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  border-radius: 10px;
+  border: 2px solid #463721;
+  background-color: #ffe386;
+  color: #463721;
+  padding: 0.25rem 0.75rem;
+  font-family: "Khand", sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.price-corner-pill {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 3;
+  border-radius: 10px;
+  border: 2px solid #463721;
+  background-color: #ffe386;
+  color: #463721;
+  padding: 0.3rem 0.75rem;
+  font-family: "Khand", sans-serif;
+  font-size: 1.65rem;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 2px 0 #463721;
+}
+
+/* Slot-Machine Vertical Rolling Text Hover */
+.vs-kinetic-wrap {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  height: 1.22em;
+  line-height: 1.22;
+  align-items: center;
+}
+
+.vs-kinetic-text {
+  display: inline-block;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.vs-kinetic-clone {
+  position: absolute;
+  left: 0;
+  top: 112%;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .vs-kinetic-text,
+button:hover .vs-kinetic-text,
+a:hover .vs-kinetic-text {
+  transform: translateY(-112%);
+}
+
+.group:hover .vs-kinetic-clone,
+button:hover .vs-kinetic-clone,
+a:hover .vs-kinetic-clone {
+  transform: translateY(-112%);
+}
+
+/* Buttons & Inputs */
+.vs-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 50px;
+  padding: 0 1.6rem;
+  border-radius: 12px;
+  border: 1.5px solid #463721;
+  background-color: #463721;
+  color: #ece2b1;
+  font-family: "Patrick Hand", cursive, sans-serif;
+  font-size: 1.15rem;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out, transform 0.16s ease-out;
+}
+
+.vs-btn-primary:hover:not(:disabled) {
+  background-color: #ffe386;
+  color: #463721;
+}
+
+.vs-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 50px;
+  padding: 0 1.6rem;
+  border-radius: 9999px;
+  border: 1.5px solid var(--color-border);
+  background-color: transparent;
+  color: var(--color-ink);
+  font-family: "Patrick Hand", cursive, sans-serif;
+  font-size: 1.15rem;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+.vs-btn-outline:hover:not(:disabled) {
+  background-color: #463721;
+  color: #ffe386;
+}
+
+.vs-btn-sm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 0 1.15rem;
+  border-radius: 10px;
+  border: 1.5px solid #463721;
+  background-color: #463721;
+  color: #ece2b1;
+  font-family: "Patrick Hand", cursive, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 0.18s ease-out, color 0.18s ease-out;
+}
+
+.vs-btn-sm:hover:not(:disabled) {
+  background-color: #ffe386;
+  color: #463721;
+}
+
+.vs-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 0 1rem;
+  border-radius: 10px;
+  border: 1.5px solid rgba(70, 55, 33, 0.35);
+  background-color: transparent;
+  color: var(--color-ink);
+  font-family: "Patrick Hand", cursive, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color 0.15s ease-out;
+}
+
+.vs-btn-ghost:hover:not(:disabled) {
+  background-color: var(--color-surface-alt);
+}
+
+.vs-input {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  border: 1.5px solid rgba(70, 55, 33, 0.45);
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Palmo Radial Flood Product Card Hover */
+.honey-radial-flood {
+  clip-path: circle(0% at 50% 50%);
+  transition: clip-path 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .honey-radial-flood {
+  clip-path: circle(95% at 50% 50%);
+}
+
+/* Gentle Botanical & Bee Motion */
+@keyframes beeOrbitA {
+  0%,
+  100% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(16px, -10px);
+  }
+}
+
+@keyframes beeOrbitB {
+  0%,
+  100% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(-18px, 10px);
+  }
+}
+
+@keyframes wingFlutter {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.65);
+  }
+}
+
+@keyframes treeCanopySway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1.2deg);
+  }
+}
+
+@keyframes hiveSwing {
+  0%,
+  100% {
+    transform: rotate(-1.8deg);
+  }
+  50% {
+    transform: rotate(1.8deg);
+  }
+}
+
+@keyframes honeyDropFall {
+  0% {
+    transform: translateY(0px);
+    opacity: 0.95;
+  }
+  80% {
+    transform: translateY(58px);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(70px);
+    opacity: 0;
+  }
+}
+
+@keyframes beekeeperWave {
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(-16deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.scene-anim-on .bee-fly-a {
+  animation: beeOrbitA 5.2s ease-in-out infinite;
+}
+
+.scene-anim-on .bee-fly-b {
+  animation: beeOrbitB 5.8s ease-in-out infinite;
+}
+
+.scene-anim-on .bee-wing {
+  transform-origin: bottom center;
+  animation: wingFlutter 0.2s ease-in-out infinite;
+}
+
+.scene-anim-on .tree-sway {
+  transform-origin: 455px 360px;
+  animation: treeCanopySway 6s ease-in-out infinite;
+}
+
+.scene-anim-on .hive-swing {
+  transform-origin: 355px 150px;
+  animation: hiveSwing 4s ease-in-out infinite;
+}
+
+.scene-anim-on .honey-drip {
+  animation: honeyDropFall 2.1s ease-in infinite;
+}
+
+.arm-harvest-burst {
+  transform-origin: 205px 252px;
+  animation: beekeeperWave 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Map subtle animations */
+@keyframes mapRadarPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes mapRouteDash {
+  to {
+    stroke-dashoffset: -48;
+  }
+}
+
+@keyframes mapPinFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.map-anim-active .map-radar-ring {
+  animation: mapRadarPulse 3s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.map-anim-active .map-radar-ring-delayed {
+  animation: mapRadarPulse 3s cubic-bezier(0.22, 1, 0.36, 1) 1.5s infinite;
+}
+
+.map-anim-active .map-route-path {
+  stroke-dasharray: 8 8;
+  animation: mapRouteDash 2.4s linear infinite;
+}
+
+.map-anim-active .map-pin-float {
+  animation: mapPinFloat 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .vs-kinetic-text,
+  .vs-kinetic-clone {
+    transform: none !important;
+  }
+}

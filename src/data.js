@@ -1,0 +1,506 @@
+export const PHOTO_RAW_HONEY = '/images/photo-raw-honey.jpg';
+export const PHOTO_DARK_FOREST = '/images/photo-dark-forest-honey.jpg';
+export const PHOTO_HONEYCOMB = '/images/photo-honeycomb-box.jpg';
+export const PHOTO_PROPOLIS = '/images/photo-propolis-dropper.jpg';
+export const PHOTO_HAMPER = '/images/photo-honey-hamper.jpg';
+export const PHOTO_GINGER_LEMON = '/images/photo-ginger-lemon-honey.jpg';
+
+export const ART_PRESETS = [
+  { label: 'Foto Madu Bunga Emas', url: PHOTO_RAW_HONEY },
+  { label: 'Foto Madu Hutan Gelap', url: PHOTO_DARK_FOREST },
+  { label: 'Foto Sarang Madu Asli', url: PHOTO_HONEYCOMB },
+  { label: 'Foto Botol Propolis', url: PHOTO_PROPOLIS },
+  { label: 'Foto Madu Jahe Lemon', url: PHOTO_GINGER_LEMON },
+  { label: 'Foto Kotak Hampers Madu', url: PHOTO_HAMPER },
+];
+
+export const INITIAL_CATEGORIES = [
+  'Madu Hutan Murni',
+  'Madu Bunga Nektar',
+  'Sarang Madu Asli',
+  'Madu Rempah & Lebah',
+  'Paket & Hampers',
+];
+
+export const INITIAL_SETTINGS = {
+  storeName: 'MaduAhay',
+  whatsappNumber: '082236010244',
+  tagline: 'Manis Murni dari Pohon & Sarang Lebah Alami',
+  addressLabel: 'Rumah Kemas & Kebun Lebah Mitra (Lihat Peta)',
+  mapsShortUrl: 'https://maps.app.goo.gl/UWcN2zsZndU6gNmc6',
+  operationalHours: 'Senin s.d. Sabtu, 08.00 s.d. 20.00 WIB',
+};
+
+const STANDARD_HONEY_GUIDE = [
+  'Gunakan sendok kayu, plastik, atau keramik kering saat menyendok madu dari dalam stoples.',
+  'Konsumsi 1 sampai 2 sendok makan setiap pagi langsung atau seduh air hangat suam-suam kuku (maksimal 40°C), jangan air mendidih agar enzim alami tetap utuh.',
+  'Simpan rapat di suhu ruang yang teduh; tidak perlu dimasukkan ke kulkas atau freezer agar madu tidak mengkristal.',
+];
+
+const HONEYCOMB_GUIDE = [
+  'Potong sarang madu seukuran satu suapan menggunakan pisau bersih.',
+  'Kunyah perlahan selama 1 sampai 2 menit hingga seluruh cairan madu manisnya keluar.',
+  'Ampas lilin lebah alami (beeswax) yang tersisa aman dibuang seperti permen karet setelah manisnya habis.',
+];
+
+export const INITIAL_PRODUCTS = [
+  {
+    id: 'hutan-sialang',
+    name: 'Madu Hutan Pohon Sialang',
+    category: 'Madu Hutan Murni',
+    price: 115000,
+    packContents: 'Botol kaca segel 450 gram',
+    weightGrams: 450,
+    stock: 34,
+    isBestSeller: true,
+    image: PHOTO_DARK_FOREST,
+    fallbackImage: PHOTO_RAW_HONEY,
+    description:
+      'Dipanen lestari dari sarang lebah liar Apis dorsata di dahan pohon sialang tinggi. Memiliki rasa manis berlapis sedikit asam segar buah hutan tanpa pemanasan pabrik.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+  {
+    id: 'hutan-odeng-baduy',
+    name: 'Madu Odeng Hutan Rimba',
+    category: 'Madu Hutan Murni',
+    price: 128000,
+    packContents: 'Botol kaca segel 450 gram',
+    weightGrams: 450,
+    stock: 22,
+    isBestSeller: true,
+    image: PHOTO_RAW_HONEY,
+    fallbackImage: PHOTO_DARK_FOREST,
+    description:
+      'Madu liar keemasan dengan aroma nektar pepohonan rimba yang wangi khas dan tekstur alami yang lembut di tenggorokan.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+  {
+    id: 'hutan-akasia-carpa',
+    name: 'Madu Hutan Akasia Carpa',
+    category: 'Madu Hutan Murni',
+    price: 98000,
+    packContents: 'Botol kaca segel 500 gram',
+    weightGrams: 500,
+    stock: 29,
+    isBestSeller: false,
+    image: PHOTO_DARK_FOREST,
+    fallbackImage: PHOTO_RAW_HONEY,
+    description:
+      'Warna cokelat kemerahan alami dari nektar pucuk daun akasia Sumatera dengan cita rasa karamel lembut yang cocok untuk campuran teh maupun roti panggang.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+  {
+    id: 'hutan-hitam-pahit',
+    name: 'Madu Hitam Pahit Mahoni',
+    category: 'Madu Hutan Murni',
+    price: 120000,
+    packContents: 'Botol kaca gelap 450 gram',
+    weightGrams: 450,
+    stock: 7,
+    isBestSeller: false,
+    image: PHOTO_PROPOLIS,
+    fallbackImage: PHOTO_DARK_FOREST,
+    description:
+      'Dihasilkan lebah yang menghisap nektar bunga pohon mahoni dan pelawan. Manis tipis di awal dengan jejak pahit rempah alami di akhir.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+  {
+    id: 'nektar-kaliandra',
+    name: 'Madu Bunga Kaliandra Kuning',
+    category: 'Madu Bunga Nektar',
+    price: 85000,
+    packContents: 'Stoples kaca 350 gram',
+    weightGrams: 350,
+    stock: 38,
+    isBestSeller: true,
+    image: PHOTO_RAW_HONEY,
+    fallbackImage: PHOTO_RAW_HONEY,
+    description:
+      'Berwarna kuning cerah alami dengan wangi serbuk bunga kaliandra pegunungan. Favorit anak-anak karena rasanya lembut dan tidak menyengat.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+  {
+    id: 'nektar-randu',
+    name: 'Madu Bunga Randu Kapuk',
+    category: 'Madu Bunga Nektar',
+    price: 79000,
+    packContents: 'Stoples kaca 350 gram',
+    weightGrams: 350,
+    stock: 31,
+    isBestSeller: false,
+    image: PHOTO_RAW_HONEY,
+    fallbackImage: PHOTO_RAW_HONEY,
+    description:
+      'Manis ringan dengan sentuhan gurih-asam tipis khas musim mekar kebun pohon randu di Jawa Tengah dan Jawa Timur.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+  {
+    id: 'nektar-kelengkeng',
+    name: 'Madu Bunga Kelengkeng',
+    category: 'Madu Bunga Nektar',
+    price: 88000,
+    packContents: 'Stoples kaca 350 gram',
+    weightGrams: 350,
+    stock: 24,
+    isBestSeller: true,
+    image: PHOTO_RAW_HONEY,
+    fallbackImage: PHOTO_RAW_HONEY,
+    description:
+      'Madu bening keemasan dengan keharuman floral kelengkeng yang manis bersih. Sangat pas sebagai pemanis alami yogurt, oatmeal, dan jus buah.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+  {
+    id: 'nektar-bunga-kopi',
+    name: 'Madu Bunga Kebun Kopi',
+    category: 'Madu Bunga Nektar',
+    price: 84000,
+    packContents: 'Stoples kaca 350 gram',
+    weightGrams: 350,
+    stock: 19,
+    isBestSeller: false,
+    image: PHOTO_DARK_FOREST,
+    fallbackImage: PHOTO_RAW_HONEY,
+    description:
+      'Panen musiman saat hamparan bunga kopi mekar serentak. Memiliki aroma wangi karamel sangrai halus tanpa kandungan kafein.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+  {
+    id: 'nektar-multiflora-saku',
+    name: 'Madu Multiflora Botol Peras',
+    category: 'Madu Bunga Nektar',
+    price: 58000,
+    packContents: 'Botol food-grade anti-tumpah 250 gram',
+    weightGrams: 250,
+    stock: 40,
+    isBestSeller: false,
+    image: PHOTO_RAW_HONEY,
+    fallbackImage: PHOTO_RAW_HONEY,
+    description:
+      'Kemasan tutup katup praktis tanpa belepotan untuk meja makan atau dibawa bepergian. Berisi madu nektar bunga kebun campuran.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+  {
+    id: 'sarang-potong-250',
+    name: 'Sarang Madu Murni Potong Segar',
+    category: 'Sarang Madu Asli',
+    price: 92000,
+    packContents: 'Kotak segel vakum 250 gram',
+    weightGrams: 250,
+    stock: 26,
+    isBestSeller: true,
+    image: PHOTO_HONEYCOMB,
+    fallbackImage: PHOTO_HONEYCOMB,
+    description:
+      'Potongan sarang lebah utuh yang sel heksagonalnya masih tertutup lapisan lilin alami penuh madu kental segar.',
+    servingGuide: HONEYCOMB_GUIDE,
+  },
+  {
+    id: 'sarang-jumbo-500',
+    name: 'Sarang Madu Mellifera Jumbo',
+    category: 'Sarang Madu Asli',
+    price: 168000,
+    packContents: 'Kotak segel vakum 500 gram + sendok kayu',
+    weightGrams: 500,
+    stock: 6,
+    isBestSeller: false,
+    image: PHOTO_HONEYCOMB,
+    fallbackImage: PHOTO_HONEYCOMB,
+    description:
+      'Ukuran keluarga setengah kilogram sarang lebah muda berwarna putih-keemasan yang empuk dikunyah dan penuh cairan madu murni.',
+    servingGuide: HONEYCOMB_GUIDE,
+  },
+  {
+    id: 'sarang-dalam-jar',
+    name: 'Stoples Madu + Irisan Sarang',
+    category: 'Sarang Madu Asli',
+    price: 118000,
+    packContents: 'Stoples lebar 400 gram',
+    weightGrams: 400,
+    stock: 18,
+    isBestSeller: false,
+    image: PHOTO_HONEYCOMB,
+    fallbackImage: PHOTO_RAW_HONEY,
+    description:
+      'Bilah sarang lebah asli yang direndam langsung di dalam madu bunga kelengkeng murni. Mendapatkan sensasi kunyah sekaligus madu tuang.',
+    servingGuide: HONEYCOMB_GUIDE,
+  },
+  {
+    id: 'sarang-mini-anak',
+    name: 'Sarang Madu Mini Bekal',
+    category: 'Sarang Madu Asli',
+    price: 52000,
+    packContents: 'Kotak segel 125 gram',
+    weightGrams: 125,
+    stock: 25,
+    isBestSeller: false,
+    image: PHOTO_HONEYCOMB,
+    fallbackImage: PHOTO_HONEYCOMB,
+    description:
+      'Porsi coba praktis sarang madu lembut sebagai pengganti permen gula buatan di rumah.',
+    servingGuide: HONEYCOMB_GUIDE,
+  },
+  {
+    id: 'rempah-klanceng',
+    name: 'Madu Klanceng Trigona Asli',
+    category: 'Madu Rempah & Lebah',
+    price: 135000,
+    packContents: 'Botol kaca 250 ml',
+    weightGrams: 310,
+    stock: 9,
+    isBestSeller: false,
+    image: PHOTO_DARK_FOREST,
+    fallbackImage: PHOTO_PROPOLIS,
+    description:
+      'Dipanen dari kantung propolis lebah tanpa sengat (Trigona). Cita rasa manis-asam buah tropis yang segar karena kaya propolis alami.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+  {
+    id: 'rempah-jahe-lemon',
+    name: 'Madu Seduh Jahe Merah & Lemon',
+    category: 'Madu Rempah & Lebah',
+    price: 76000,
+    packContents: 'Stoples kaca 320 gram',
+    weightGrams: 320,
+    stock: 27,
+    isBestSeller: false,
+    image: PHOTO_GINGER_LEMON,
+    fallbackImage: PHOTO_RAW_HONEY,
+    description:
+      'Madu multiflora murni yang dipadukan sari jahe merah segar dan perasan lemon lokal. Hangat melegakan saat cuaca hujan.',
+    servingGuide: [
+      'Aduk perlahan sebelum disendok agar sari jahe merah merata.',
+      'Seduh 2 sendok makan ke dalam segelas air hangat 180 ml.',
+    ],
+  },
+  {
+    id: 'rempah-propolis',
+    name: 'Propolis Lebah Tetes Murni',
+    category: 'Madu Rempah & Lebah',
+    price: 95000,
+    packContents: 'Botol pipet kaca 30 ml',
+    weightGrams: 85,
+    stock: 20,
+    isBestSeller: false,
+    image: PHOTO_PROPOLIS,
+    fallbackImage: PHOTO_PROPOLIS,
+    description:
+      'Ekstrak getah sarang lebah murni bebas alkohol yang praktis diteteskan ke dalam air hangat atau dicampur satu sendok madu.',
+    servingGuide: [
+      'Teteskan 3 sampai 5 tetes ke dalam setengah gelas air hangat.',
+      'Aduk memakai sendok non-logam lalu minum di pagi hari.',
+    ],
+  },
+  {
+    id: 'rempah-royal-pollen',
+    name: 'Madu Super Bee Pollen & Royal Jelly',
+    category: 'Madu Rempah & Lebah',
+    price: 142000,
+    packContents: 'Stoples kaca 350 gram',
+    weightGrams: 350,
+    stock: 15,
+    isBestSeller: false,
+    image: PHOTO_GINGER_LEMON,
+    fallbackImage: PHOTO_RAW_HONEY,
+    description:
+      'Paduan lengkap madu nektar bunga, butiran serbuk sari lebah (bee pollen), dan royal jelly segar dalam satu stoples.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+  {
+    id: 'paket-keranjang-keluarga',
+    name: 'Keranjang Panen Keluarga (3 Botol)',
+    category: 'Paket & Hampers',
+    price: 229000,
+    packContents: '1 Hutan Sialang + 1 Kaliandra + 1 Jahe Lemon + Sendok Ulir',
+    weightGrams: 1150,
+    stock: 16,
+    isBestSeller: true,
+    image: PHOTO_HAMPER,
+    fallbackImage: PHOTO_HAMPER,
+    description:
+      'Paket hemat lengkap 3 karakter madu favorit keluarga lengkap dengan sendok kayu ulir (honey dipper) di dalam kotak kayu eksklusif.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+  {
+    id: 'paket-hampers-kado',
+    name: 'Hampers Bingkisan Sarang & Madu',
+    category: 'Paket & Hampers',
+    price: 185000,
+    packContents: '1 Madu Kelengkeng 350g + 1 Sarang Potong 250g + Kartu Ucapan',
+    weightGrams: 720,
+    stock: 14,
+    isBestSeller: false,
+    image: PHOTO_HAMPER,
+    fallbackImage: PHOTO_HAMPER,
+    description:
+      'Bingkisan manis sehat dengan kotak kayu rapi, sendok ulir, dan kartu ucapan tulis tangan untuk kerabat.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+  {
+    id: 'paket-reseller-10',
+    name: 'Paket Mitra Kedai 10 Stoples',
+    category: 'Paket & Hampers',
+    price: 690000,
+    packContents: '10 Stoples Campur 350g (Bebas Pilih Varian Bunga)',
+    weightGrams: 3800,
+    stock: 5,
+    isBestSeller: false,
+    image: PHOTO_HAMPER,
+    fallbackImage: PHOTO_RAW_HONEY,
+    description:
+      'Paket grosir untuk kedai teh, toko organik, dan reseller rumahan lengkap dengan pelindung gelembung tebal per botol.',
+    servingGuide: STANDARD_HONEY_GUIDE,
+  },
+];
+
+export const INITIAL_ARTICLES = [
+  {
+    id: 'art-madu-1',
+    slug: 'kenapa-madu-murni-tidak-perlu-disimpan-di-kulkas',
+    title: 'Kenapa Madu Murni Sebaiknya Disimpan di Suhu Ruang, Bukan di Kulkas?',
+    category: 'Penyimpanan Madu',
+    readMinutes: 3,
+    publishedAt: '2026-11-10',
+    status: 'Terbit',
+    excerpt:
+      'Menyimpan botol madu asli di dalam lemari es justru mempercepat kristalisasi glukosa alami sehingga teksturnya mengental seperti pasir.',
+    image: PHOTO_RAW_HONEY,
+    content: [
+      'Banyak orang menaruh madu di rak kulkas karena khawatir berjamur atau dikerubungi semut. Padahal madu matang alami memiliki kadar air rendah dan keasaman alami yang membuatnya tahan disimpan lama di suhu ruang asalkan tutup botolnya rapat.',
+      'Saat diletakkan di suhu dingin kulkas (di bawah 15 derajat Celcius), kandungan glukosa alami dari nektar bunga seperti Kaliandra atau Randu akan membentuk butiran kristal halus. Kristalisasi ini bukan tanda madu rusak, melainkan sifat fisik glukosa murni.',
+      'Jika madu Anda telanjur mengkristal, cukup rendam botol kaca di dalam mangkuk berisi air hangat 40 derajat Celcius selama 10 menit sambil diaduk perlahan hingga kembali cair keemasan.',
+      'Cukup letakkan stoples di lemari dapur kering yang tidak terkena sinar matahari langsung dan selalu gunakan sendok kering saat mengambil madu.',
+    ],
+  },
+  {
+    id: 'art-madu-2',
+    slug: 'suhu-air-terbaik-menyeduh-madu-pagi-hari',
+    title: 'Jangan Seduh dengan Air Mendidih: Suhu Terbaik Minum Madu di Pagi Hari',
+    category: 'Cara Konsumsi',
+    readMinutes: 3,
+    publishedAt: '2026-11-15',
+    status: 'Terbit',
+    excerpt:
+      'Air yang baru mendidih 100 derajat Celcius dapat merusak enzim diastase dan aroma bunga halus pada madu mentah.',
+    image: PHOTO_GINGER_LEMON,
+    content: [
+      'Madu mentah (raw honey) yang tidak melalui pemanasan pabrik masih menyimpan enzim alami dari lebah serta aroma serbuk sari bunga. Enzim ini sensitif terhadap suhu tinggi di atas 45 hingga 50 derajat Celcius.',
+      'Saat membuat teh madu atau air lemon hangat di pagi hari, tuang air panas terlebih dahulu ke cangkir dan tunggu 3 sampai 4 menit hingga suhunya nyaman disentuh bibir (suam-suam kuku), baru tambahkan 1 sampai 2 sendok makan madu.',
+      'Gunakan sendok kayu ulir (honey dipper) atau sendok keramik agar rasa segar alami terutama pada Madu Hutan Sialang dan Madu Klanceng tidak berubah.',
+    ],
+  },
+  {
+    id: 'art-madu-3',
+    slug: 'mengenal-perbedaan-rasa-madu-hutan-dan-madu-ternak-bunga',
+    title: 'Mengenal Perbedaan Rasa, Warna, dan Kekentalan Madu Hutan vs Madu Bunga Kebun',
+    category: 'Edukasi Lebah',
+    readMinutes: 4,
+    publishedAt: '2026-11-19',
+    status: 'Terbit',
+    excerpt:
+      'Madu murni tidak selalu berwarna kuning bening dan sangat kental; curah hujan dan jenis pohon nektar menentukan karakter tiap musim panen.',
+    image: PHOTO_DARK_FOREST,
+    content: [
+      'Lebah hutan liar Apis dorsata membuat sarang terbuka di dahan pohon sialang tinggi di hutan hujan tropis. Karena udara hutan lembap dan lebah menghisap puluhan jenis bunga pohon liar, Madu Hutan Sialang cenderung sedikit lebih encer dengan gas buih halus dan rasa manis-asam segar.',
+      'Sebaliknya, lebah Apis mellifera yang digembalakan di perkebunan kelengkeng, kaliandra, atau randu menyimpan madu di kotak kayu tertutup. Hasilnya memiliki warna, wangi, dan kekentalan yang lebih khas sesuai satu jenis bunga yang sedang mekar.',
+      'Karena kami mengemas madu tanpa pengental buatan maupun pewarna, perbedaan rona kuning cerah hingga cokelat tua antarbatch panen adalah tanda keaslian alam.',
+    ],
+  },
+  {
+    id: 'art-madu-4',
+    slug: 'cara-menikmati-sarang-madu-asli-untuk-pemula',
+    title: 'Cara Menikmati Sarang Madu Asli: Apakah Lilin Sarangnya Boleh Ditelan?',
+    category: 'Tips Penyajian',
+    readMinutes: 3,
+    publishedAt: '2026-11-23',
+    status: 'Terbit',
+    excerpt:
+      'Sensasi mengunyah sel heksagonal lilin lebah yang pecah mengeluarkan madu segar di mulut sangat mudah dinikmati bersama roti panggang atau buah.',
+    image: PHOTO_HONEYCOMB,
+    content: [
+      'Sarang madu murni (honeycomb) adalah bentuk paling utuh dari madu sebelum diperas. Seluruh cairan madu masih tersegel rapat di dalam bilik heksagonal berlapis lilin lebah alami (beeswax).',
+      'Potong sarang selebar 2 cm, lalu kunyah perlahan seperti permen karet selama 1 sampai 2 menit hingga seluruh manis madunya habis. Sisa gumpalan lilin putih yang tawar sebaiknya dilepeh ke tisu, meski jika tertelan sedikit bersama roti panggang hangat tetap aman karena terbuat dari lilin lebah food-grade alami.',
+      'Paduan paling nikmat di rumah: letakkan sepotong sarang madu di atas roti tawar panggang hangat beroles mentega tawar atau di atas irisan pisang dan keju.',
+    ],
+  },
+];
+
+export const INITIAL_REVIEWS = [
+  {
+    id: 'rev-madu-1',
+    initials: 'AN',
+    customerLabel: 'Pembeli Terverifikasi (Contoh Data Demo)',
+    productName: 'Madu Hutan Pohon Sialang',
+    rating: 5,
+    comment:
+      'Wangi bunga hutannya segar sekali waktu tutup botol dibuka, manisnya lembut di tenggorokan dan anak-anak suka diminum pagi hari.',
+    isSamplePlaceholder: true,
+    dateLabel: 'Contoh Ulasan Toko',
+  },
+  {
+    id: 'rev-madu-2',
+    initials: 'BS',
+    customerLabel: 'Pembeli Terverifikasi (Contoh Data Demo)',
+    productName: 'Sarang Madu Murni Potong Segar',
+    rating: 5,
+    comment:
+      'Sarangnya masih utuh tebal dan madunya melimpah waktu dikunyah. Pengemasan kotaknya aman tidak rembes sama sekali.',
+    isSamplePlaceholder: true,
+    dateLabel: 'Contoh Ulasan Toko',
+  },
+  {
+    id: 'rev-madu-3',
+    initials: 'KR',
+    customerLabel: 'Pembeli Terverifikasi (Contoh Data Demo)',
+    productName: 'Keranjang Panen Keluarga (3 Botol)',
+    rating: 5,
+    comment:
+      'Suka sekali sama tampilan stoples dan kotaknya yang rapi buat bingkisan keluarga, dapat sendok kayu ulir juga di dalamnya.',
+    isSamplePlaceholder: true,
+    dateLabel: 'Contoh Ulasan Toko',
+  },
+];
+
+export const INITIAL_ORDERS = [
+  {
+    id: 'ORD-101',
+    customerName: 'Ibu Rina Wulandari',
+    itemsSummary: '2x Madu Hutan Pohon Sialang (450g)',
+    total: 230000,
+    notes: 'Kirim kurir instan sore ini, tambah selongsong pelindung.',
+    status: 'Baru Masuk',
+    createdAt: 'Hari ini, 09.15 WIB',
+  },
+  {
+    id: 'ORD-102',
+    customerName: 'Bapak Hendra Kusuma',
+    itemsSummary: '1x Keranjang Panen Keluarga + 1x Sarang Madu Potong',
+    total: 321000,
+    notes: 'Titip kartu ucapan selamat ulang tahun di dalam kotak.',
+    status: 'Sedang Dikemas',
+    createdAt: 'Hari ini, 10.30 WIB',
+  },
+  {
+    id: 'ORD-103',
+    customerName: 'Kedai Kopi Rimbun',
+    itemsSummary: '3x Madu Bunga Kaliandra Kuning (350g)',
+    total: 255000,
+    notes: 'Pengiriman reguler antarkota.',
+    status: 'Siap Kirim',
+    createdAt: 'Kemarin, 16.40 WIB',
+  },
+];
+
+export const INITIAL_OPERATOR_LOGS = [
+  {
+    id: 'log-1',
+    time: '08.30 WIB',
+    actor: 'Operator Dapur',
+    note: 'Pemeriksaan segel 34 botol Madu Hutan Pohon Sialang batch pagi selesai.',
+  },
+  {
+    id: 'log-2',
+    time: '10.15 WIB',
+    actor: 'Operator Pengemasan',
+    note: 'Menyiapkan kotak kayu & bubble wrap untuk pesanan ORD-102.',
+  },
+];

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F8F8F0"/>
+  <circle cx="200" cy="154" r="98" fill="#ECE2B1" opacity="0.65"/>
+  <!-- Minimalist Honeycomb Cells -->
+  <g stroke="#463721" stroke-width="4" stroke-linejoin="round">
+    <polygon points="154,92 182,76 210,92 210,124 182,140 154,124" fill="#FFE386"/>
+    <polygon points="210,92 238,76 266,92 266,124 238,140 210,124" fill="#FFC82C"/>
+    <polygon points="126,140 154,124 182,140 182,172 154,188 126,172" fill="#FFC82C"/>
+    <polygon points="182,140 210,124 238,140 238,172 210,188 182,172" fill="#F59E0B"/>
+    <polygon points="238,140 266,124 294,140 294,172 266,188 238,172" fill="#FFE386"/>
+    <polygon points="154,188 182,172 210,188 210,220 182,236 154,220" fill="#FFC82C"/>
+    <polygon points="210,188 238,172 266,188 266,220 238,236 210,220" fill="#FFB703"/>
+  </g>
+  <path d="M182 236 C182 254 196 254 196 236 Z" fill="#F59E0B" stroke="#463721" stroke-width="3.5"/>
+</svg>

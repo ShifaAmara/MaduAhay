@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#F8F8F0"/>
+  <circle cx="200" cy="154" r="96" fill="#FFE386" opacity="0.55"/>
+  <!-- Minimalist Honey Jar -->
+  <rect x="148" y="88" width="104" height="142" rx="28" fill="#FFC82C" stroke="#463721" stroke-width="4"/>
+  <path d="M151 128 Q176 140 200 128 T249 130 L249 202 Q249 227 224 227 L176 227 Q151 227 151 202 Z" fill="#F59E0B"/>
+  <rect x="158" y="66" width="84" height="24" rx="10" fill="#463721"/>
+  <!-- Minimalist Blank Cream Label with Hexagon Emblem (Zero Text) -->
+  <rect x="166" y="142" width="68" height="54" rx="12" fill="#F8F8F0" stroke="#463721" stroke-width="3.5"/>
+  <polygon points="200,155 212,162 212,176 200,183 188,176 188,162" fill="#FFE386" stroke="#463721" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M161 114 V196" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <!-- Minimalist Bee -->
+  <g transform="translate(274, 74) rotate(-10)">
+    <ellipse cx="14" cy="8" rx="7" ry="10" fill="#FFFFFF" stroke="#463721" stroke-width="3"/>
+    <ellipse cx="22" cy="9" rx="6" ry="8.5" fill="#FFFFFF" stroke="#463721" stroke-width="3"/>
+    <ellipse cx="18" cy="20" rx="16" ry="11.5" fill="#FFE386" stroke="#463721" stroke-width="3.5"/>
+    <path d="M14 9 V30 M22 9 V30" stroke="#463721" stroke-width="3.5"/>
+    <circle cx="9" cy="19" r="2" fill="#463721"/>
+  </g>
+</svg>
